@@ -1,0 +1,1 @@
+Estem en un repositori de Accés a dades.
