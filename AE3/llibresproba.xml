@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Biblioteca>
+    <Llibre id="1">
+        <Títol>Dune</Títol>
+        <Autor>Frank Herbert</Autor>
+        <Any>1965</Any>
+        <Editorial>Chilton Company</Editorial>
+        <Pags>628</Pags>
+    </Llibre>
+    <Llibre id="2">
+        <Títol>Don Quijote de la Mancha</Títol>
+        <Autor>Miguel de Cervantes</Autor>
+        <Any>1605</Any>
+        <Editorial>Francisco Robles</Editorial>
+        <Pags>1345</Pags>
+    </Llibre>
+    <Llibre id="3">
+        <Títol>El Hobbit</Títol>
+        <Autor>J.R.R Tolkien</Autor>
+        <Any>1937</Any>
+        <Editorial>Ediciones Minotauro</Editorial>
+        <Pags>310</Pags>
+    </Llibre>
+    <Llibre id="4">
+        <Títol>Harry Potter y la piedra filosofal</Títol>
+        <Autor>J.K Roulin</Autor>
+        <Any>1997</Any>
+        <Editorial>Salamandra</Editorial>
+        <Pags>223</Pags>
+    </Llibre>
+    <Llibre id="5">
+        <Títol>Platero y yo</Títol>
+        <Autor>Juan Ram? Jimenez</Autor>
+        <Any>1914</Any>
+        <Editorial>Ediciones de la lectura</Editorial>
+        <Pags>190</Pags>
+    </Llibre>
+    <Llibre id="6">
+        <Títol>Corredores del bloque</Títol>
+        <Autor>Marko Italia</Autor>
+        <Any>2010</Any>
+        <Editorial>Takers</Editorial>
+        <Pags>234</Pags>
+    </Llibre>
+</Biblioteca>
