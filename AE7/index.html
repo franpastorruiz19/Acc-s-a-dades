@@ -1,0 +1,220 @@
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ValoraPastor</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript">
+        function guardar() {
+            var t = document.getElementById('strCercaPelicula').value
+            var data = document.getElementById('strData').value
+            var direc = document.getElementById('strDirector').value
+            var desc = document.getElementById('strDescripcio').value
+            var dura = document.getElementById('strDuracio').value
+            var repart = document.getElementById('strRepartiment').value
+            var gen = document.getElementById('strGenere').value
+            var tip = document.getElementById('strTipus').value
+            var prem = document.getElementById('strPremis').value
+            var resse = document.getElementById('strRessenya').value
+            var valora = document.getElementById('strValoracio').value
+            $.ajax({
+                type: "POST", //metode POST per a enviar dades al servidor
+                url: "fichero.php", // ruta del fitxer PHP del servidor
+                data: {
+                    titol: t, data_estrena: data, director: direc, descripcio: desc,
+                    duracio: dura, repartiment: repart, ressenya: resse, valoracio: valora,
+                    genere:gen, tipus:tip, premis:prem
+                },
+                success: function (response) { //resultat del PHP del servidor
+                    alert(response);
+                },
+                error: function () {
+                    alert("Error");
+                }
+            });
+        }</script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function getPeliculaInfo() {
+            var strCercaPelicula = document.getElementById('strCercaPelicula').value;
+            axios
+                .get("https://www.omdbapi.com/?apikey=679f1377&t=" + strCercaPelicula)
+                .then(response => {
+                    console.log(response.data);
+                    document.getElementById('strDescripcio').value =
+                        response.data.Plot;
+                    document.getElementById('imgPelicula').src = response.data.Poster;
+                    document.getElementById('imgPelicula').style.display = "block";
+                    document.getElementById('strRepartiment').value = response.data.Actors;
+                    document.getElementById('strDirector').value = response.data.Director;
+                    document.getElementById('strData').value = response.data.Released;
+                    document.getElementById('strDuracio').value = response.data.Runtime;
+                    document.getElementById('strGenere').value = response.data.Genre;
+                    document.getElementById('strTipus').value = response.data.Type;
+                    document.getElementById('strPremis').value = response.data.Awards;
+                    document.getElementById('strRessenya').disabled=false;
+                    document.getElementById('strValoracio').disabled=false;
+                   
+
+                })
+                .catch(error => {
+                    console.error(error);
+                    document.getElementById('strDescripcio').value = "ERROR EN LA CONSULTA: " + error;
+                    document.getElementById('imagenGrupo').style.display = "none";
+                });
+        }
+    </script>
+    <script>
+        function ValidarCercar(){
+
+        }
+    </script>
+</head>
+
+<body>
+    <div
+        style="text-align: center;  background-color: orange; border-radius: 40px;border-style: solid; margin: auto;height: 10%;">
+        <h1 style="margin-top: 0.75%;">VALORAPASTOR</h1>
+    </div>
+    <div style="margin-top: 1%;width: 35%;height: 85%;float: left;">
+        <div
+            style="background-color: orange;margin-top: 1%;width: 100%;border-style: solid;border-radius: 40px;height: 20%;">
+            <p style="margin-left: 5%; margin-top: 6%;">ESCRIU EL TÍTOL ORIGINAL DE LA PELÍCULA:</p>
+            <p style="margin-left: 5%;"><input type="text" value="" id="strCercaPelicula" style="width: 70%;">
+                <button id="btnCercaPelicula" onclick=getPeliculaInfo()>Cercar</button>
+            </p>
+        </div>
+        <div
+            style="background-color: orange;margin-top: 3%;width: 100%;border-style: solid;border-radius: 40px;height: 52.5%; ">
+            <div style="margin-left: 5%; margin-top: 6%;">
+                <p>Ressenya:</p>
+                <textarea id="strRessenya" rows="4" style="width:85%;" disabled="true"></textarea>
+                <p>Valoració:</p>
+                <textarea id="strValoracio" rows="1" disabled></textarea>
+    
+                <p><button id="btnGuardar" onclick=guardar()>Guardar</button></p>
+            </div>
+            
+        </div>
+        <div
+            style="background-color: orange;margin-top: 3%;width: 100%;border-style: solid;border-radius: 40px;height: 20%;">
+            <div>
+                <p style="margin-left: 5%; margin-top: 3%;">REALITZAT PER FRANCISCO PASTOR RUIZ</p>
+                <p style="margin-left: 5%; margin-top: -2.5%; ">2º DAM</p>
+                <p style="margin-left: 5%;margin-top: -2.5%;">ACCÉS A DADES</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <div
+        style="background-color: orange;margin-top: 1%;width: 63%;border-style: solid;border-radius: 40px;height: 85%;float: left; margin-left: 1%;">
+        <div style="float:right; margin-top: 2%; width: 30%;">
+            <img id="imgPelicula" src="" height="300" style="display:none; border-radius: 25px;" />
+        </div>
+        <div style="margin-left: 4%; margin-top: 2%; width: 60%;">
+            <div style="width: 100%; height:30%;">
+                <div style="width: 20%;float: left;">
+                    Descripció:
+                </div>
+
+                <div style="width: 70%;float: left;">
+                    <textarea id="strDescripcio" style="width:100%; " rows="8" disabled></textarea>
+                </div>
+
+            </div>
+
+            <div style="width: 100%; height:14%;">
+                <div style="width: 20%;float: left;">
+                    Repartiment:
+                </div>
+
+                <div style="width: 50%;float: left;">
+                    <textarea id="strRepartiment" style="width:100%; " rows="3" disabled></textarea>
+                </div>
+
+            </div>
+
+
+
+            <div style="width: 100%; height:7.5%;">
+                <div style="width: 20%;float: left;">
+                    Data:
+                </div>
+
+                <div style="width: 50%;float: left;">
+                    <textarea id="strData" style="width:100%; " rows="1" disabled></textarea>
+                </div>
+
+            </div>
+            <div style="width: 100%; height:7.5%;">
+                <div style="width: 20%;float: left;">
+                    Director:
+                </div>
+
+                <div style="width: 50%;float: left;">
+                    <textarea id="strDirector" style="width:100%; " rows="1" disabled></textarea>
+                </div>
+
+            </div>
+
+            <div style="width: 100%; height:7.5%;">
+                <div style="width: 20%;float: left;">
+                    Duració:
+                </div>
+
+                <div style="width: 50%;float: left;">
+                    <textarea id="strDuracio" style="width:100%; " rows="1" disabled></textarea>
+                </div>
+
+            </div>
+
+            <div style="width: 100%; height:7.5%;">
+                <div style="width: 20%;float: left;">
+                    Gènere:
+                </div>
+
+                <div style="width: 50%;float: left;">
+                    <textarea id="strGenere" style="width:100%; " rows="1" disabled></textarea>
+                </div>
+
+            </div>
+
+            <div style="width: 100%; height:7.5%;">
+                <div style="width: 20%;float: left;">
+                    Tipus:
+                </div>
+
+                <div style="width: 50%;float: left;">
+                    <textarea id="strTipus" style="width:100%; " rows="1" disabled></textarea>
+                </div>
+
+            </div>
+
+            <div style="width: 100%; height:7.5%;">
+                <div style="width: 20%;float: left;">
+                    Premis:
+                </div>
+
+                <div style="width: 50%;float: left;">
+                    <textarea id="strPremis" style="width:100%; " rows="3" disabled></textarea>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
